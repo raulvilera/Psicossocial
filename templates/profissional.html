@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Profissional - Psico Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --secondary: #6366f1;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--white);
+            border-right: 1px solid #e2e8f0;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 0.75rem;
+            transition: all 0.2s;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background: #f0f9ff;
+            color: var(--primary);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 1.75rem;
+            color: var(--text-main);
+        }
+
+        .stat-card p {
+            margin: 0.25rem 0 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .btn-logout {
+            margin-top: auto;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            border-radius: 0.75rem;
+        }
+
+        .btn-logout:hover {
+            background: #fef2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <span>Psicossocial Pro</span>
+        </div>
+
+        <nav>
+            <a href="#" class="nav-item active">
+                <i class="fas fa-th-large"></i>
+                Dashboard
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-clipboard-list"></i>
+                Avaliações
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-users"></i>
+                Pacientes
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-calendar-alt"></i>
+                Agenda
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-file-medical-alt"></i>
+                Relatórios
+            </a>
+        </nav>
+
+        <a href="/login" class="btn-logout">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair
+        </a>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div>
+                <h1 style="margin: 0; font-size: 1.75rem;">Olá, Dra. Carmen</h1>
+                <p style="margin: 0.25rem 0 0; color: var(--text-muted);">Bem-vinda à sua área profissional de
+                    Psicologia.</p>
+            </div>
+            <div class="user-info">
+                <div style="text-align: right;">
+                    <div style="font-weight: 600;">Carmen Santana</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Psicóloga Clínica</div>
+                </div>
+                <div class="user-avatar">CS</div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-clipboard-check"></i>
+                <h3>12</h3>
+                <p>Avaliações Pendentes</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-clock"></i>
+                <h3>08</h3>
+                <p>Consultas Hoje</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-smile"></i>
+                <h3>94%</h3>
+                <p>Índice de Bem-estar</p>
+            </div>
+            <div class="stat-card" style="border-left: 4px solid var(--primary);">
+                <i class="fas fa-exclamation-triangle" style="color: #f59e0b;"></i>
+                <h3>03</h3>
+                <p>Casos Críticos</p>
+            </div>
+        </div>
+
+        <div class="section-title">Acompanhamentos Recentes</div>
+        <div class="card">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; color: var(--text-muted); font-size: 0.875rem;">
+                        <th style="padding-bottom: 1rem;">Colaborador</th>
+                        <th style="padding-bottom: 1rem;">Empresa</th>
+                        <th style="padding-bottom: 1rem;">Última Sessão</th>
+                        <th style="padding-bottom: 1rem;">Status</th>
+                        <th style="padding-bottom: 1rem;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-top: 1px solid #f1f5f9;">
+                        <td style="padding: 1rem 0; font-weight: 500;">João Ferreira</td>
+                        <td style="padding: 1rem 0;">Tech Solutions</td>
+                        <td style="padding: 1rem 0;">Hoje, 14:00</td>
+                        <td style="padding: 1rem 0;"><span class="badge badge-success">Concluído</span></td>
+                        <td style="padding: 1rem 0;"><a href="#" style="color: var(--primary);"><i
+                                    class="fas fa-eye"></i></a></td>
+                    </tr>
+                    <tr style="border-top: 1px solid #f1f5f9;">
+                        <td style="padding: 1rem 0; font-weight: 500;">Maria Oliveira</td>
+                        <td style="padding: 1rem 0;">Inovatech S.A.</td>
+                        <td style="padding: 1rem 0;">Ontem, 09:30</td>
+                        <td style="padding: 1rem 0;"><span class="badge badge-warning">Em análise</span></td>
+                        <td style="padding: 1rem 0;"><a href="#" style="color: var(--primary);"><i
+                                    class="fas fa-eye"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

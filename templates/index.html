@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SESMT PRO — Plataforma Inteligente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   SESMT PRO — Design System
+   Tema: Industrial Premium / Dark Glass
+   ═══════════════════════════════════════ */
+:root {
+  --bg: #060d19;
+  --bg1: #0b1628;
+  --bg2: #0f1e36;
+  --bg3: #162540;
+  --border: #1b2e4b;
+  --border2: #243d60;
+  --accent: #00e5b0;
+  --accent2: #00b8d9;
+  --accent3: #7c3aed;
+  --warn: #f59e0b;
+  --danger: #f43f5e;
+  --success: #10b981;
+  --info: #3b82f6;
+  --text: #e8f0fe;
+  --text2: #8ba3c7;
+  --text3: #4a6080;
+  --font-head: 'Clash Display', sans-serif;
+  --font-body: 'Cabinet Grotesk', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --glow: 0 0 20px rgba(0,229,176,0.15);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(0,229,176,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(0,184,217,0.03) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ── Layout ── */
+.shell { display: flex; min-height: 100vh; position: relative; z-index: 1; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 256px; min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; z-index: 100;
+}
+.sb-logo {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.sb-logo-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, rgba(0,229,176,0.15), rgba(0,184,217,0.08));
+  border: 1px solid rgba(0,229,176,0.2);
+  border-radius: 10px; padding: 6px 12px 6px 8px;
+  margin-bottom: 12px;
+}
+.sb-logo-icon {
+  width: 28px; height: 28px; background: var(--accent);
+  border-radius: 7px; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: var(--bg); font-family: var(--font-head);
+}
+.sb-logo-text { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: 0.5px; }
+.sb-logo h1 { font-family: var(--font-head); font-size: 22px; font-weight: 700; line-height: 1.1; }
+.sb-logo h1 span { color: var(--accent); }
+.sb-logo p { font-size: 11px; color: var(--text3); font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; margin-top: 2px; }
+
+/* Empresa Selector */
+.sb-empresa {
+  margin: 14px 12px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; cursor: pointer;
+  transition: border-color .2s;
+}
+.sb-empresa:hover { border-color: var(--border2); }
+.sb-empresa label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+.sb-empresa select {
+  background: none; border: none; color: var(--text); font-size: 13px;
+  font-family: var(--font-body); font-weight: 600; width: 100%; outline: none; cursor: pointer;
+}
+.sb-empresa select option { background: var(--bg2); }
+
+.sb-nav { flex: 1; padding: 8px 10px; overflow-y: auto; }
+.sb-section { margin-bottom: 20px; }
+.sb-section-title {
+  font-size: 10px; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 1.5px;
+  padding: 0 10px; margin-bottom: 4px;
+}
+.sb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: 9px; cursor: pointer;
+  font-size: 14px; font-weight: 500; color: var(--text2);
+  transition: all .18s; margin-bottom: 1px;
+  border: 1px solid transparent; position: relative;
+}
+.sb-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+.sb-item.active {
+  background: linear-gradient(135deg, rgba(0,229,176,0.12), rgba(0,184,217,0.06));
+  color: var(--accent); border-color: rgba(0,229,176,0.18);
+}
+.sb-item .ico { font-size: 16px; width: 20px; text-align: center; }
+.sb-badge {
+  margin-left: auto; background: var(--danger); color: white;
+  font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 20px;
+}
+.sb-badge.warn { background: var(--warn); color: #1a0a00; }
+
+.sb-footer {
+  padding: 14px 12px;
+  border-top: 1px solid var(--border);
+}
+.sb-user {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; border-radius: 9px;
+  background: var(--bg3); cursor: pointer;
+}
+.sb-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: var(--bg); flex-shrink: 0;
+}
+.sb-user-name { font-size: 13px; font-weight: 700; }
+.sb-user-role { font-size: 11px; color: var(--text3); }
+
+/* ── Main ── */
+.main { margin-left: 256px; flex: 1; display: flex; flex-direction: column; }
+
+/* ── Topbar ── */
+.topbar {
+  height: 58px; background: rgba(11,22,40,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 28px; gap: 14px;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; flex: 1; }
+.topbar-search {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 9px; padding: 7px 13px;
+  display: flex; align-items: center; gap: 8px;
+  transition: border-color .2s; max-width: 300px; flex: 1;
+}
+.topbar-search:focus-within { border-color: var(--accent); }
+.topbar-search input {
+  background: none; border: none; outline: none; color: var(--text);
+  font-size: 13px; font-family: var(--font-body); width: 100%;
+}
+.topbar-search input::placeholder { color: var(--text3); }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.topbar-btn {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px; transition: all .18s; position: relative;
+}
+.topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+.notif-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--danger);
+  position: absolute; top: 5px; right: 5px; border: 2px solid var(--bg1);
+}
+.ia-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(0,184,217,0.1));
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 8px; padding: 5px 10px;
+  font-size: 12px; font-weight: 600; color: #a78bfa;
+}
+.ia-dot { width: 6px; height: 6px; border-radius: 50%; background: #a78bfa; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+/* ── Content ── */
+.content { padding: 26px 28px; flex: 1; }
+.page { display: none; animation: fadeUp .3s ease; }
+.page.active { display: block; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── Page Header ── */
+.ph { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 26px; gap: 16px; }
+.ph h2 { font-family: var(--font-head); font-size: 28px; font-weight: 700; line-height: 1.1; }
+.ph p { color: var(--text3); font-size: 14px; margin-top: 4px; }
+.ph-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 9px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; font-family: var(--font-body);
+  transition: all .18s; white-space: nowrap;
+}
+.btn-accent { background: var(--accent); color: var(--bg); }
+.btn-accent:hover { background: #00ffcc; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,229,176,0.3); }
+.btn-ghost { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--border2); color: var(--text); }
+.btn-danger { background: rgba(244,63,94,0.12); color: var(--danger); border: 1px solid rgba(244,63,94,0.25); }
+.btn-danger:hover { background: rgba(244,63,94,0.2); }
+.btn-info { background: rgba(59,130,246,0.12); color: var(--info); border: 1px solid rgba(59,130,246,0.25); }
+.btn-violet { background: rgba(124,58,237,0.12); color: #a78bfa; border: 1px solid rgba(124,58,237,0.25); }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-xs { padding: 4px 9px; font-size: 11px; }
+
+/* ── Grid ── */
+.grid { display: grid; gap: 18px; }
+.g4 { grid-template-columns: repeat(4,1fr); }
+.g3 { grid-template-columns: repeat(3,1fr); }
+.g2 { grid-template-columns: repeat(2,1fr); }
+.g2-1 { grid-template-columns: 2fr 1fr; }
+
+/* ── Cards ── */
+.card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  transition: all .2s;
+}
+.card-hover:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: var(--shadow); }
+.card-glow:hover { border-color: rgba(0,229,176,0.25); box-shadow: var(--glow); }
+
+/* ── KPI Cards ── */
+.kpi {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; transition: all .2s;
+}
+.kpi:hover { transform: translateY(-2px); }
+.kpi-icon {
+  width: 44px; height: 44px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 14px;
+}
+.kpi-value { font-family: var(--font-head); font-size: 34px; font-weight: 700; line-height: 1; }
+.kpi-label { font-size: 13px; color: var(--text2); margin-top: 4px; font-weight: 500; }
+.kpi-sub { font-size: 12px; margin-top: 10px; display: flex; align-items: center; gap: 5px; color: var(--text3); }
+.kpi-sub.up { color: var(--success); }
+.kpi-sub.down { color: var(--danger); }
+
+/* ── IA Card ── */
+.ia-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(0,184,217,0.06) 100%);
+  border: 1px solid rgba(124,58,237,0.25); border-radius: var(--radius); padding: 22px;
+  position: relative; overflow: hidden;
+}
+.ia-card::before {
+  content: ''; position: absolute; top: -30px; right: -30px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+}
+.ia-score-ring {
+  width: 90px; height: 90px; border-radius: 50%;
+  border: 3px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; flex-shrink: 0;
+}
+.ia-score-ring svg { position: absolute; top: -3px; left: -3px; transform: rotate(-90deg); }
+.ia-score-value { font-family: var(--font-head); font-size: 24px; font-weight: 700; }
+.ia-score-unit { font-size: 10px; color: var(--text3); display: block; text-align: center; }
+.ring-row { display: flex; align-items: center; gap: 18px; }
+.ia-details { flex: 1; }
+.ia-detail-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+.ia-detail-row:last-child { border-bottom: none; }
+.ia-detail-label { color: var(--text2); }
+.ia-detail-value { font-weight: 600; }
+.ia-rec {
+  margin-top: 12px; padding: 10px 12px;
+  background: rgba(0,0,0,0.2); border-radius: 9px; border-left: 3px solid #a78bfa;
+  font-size: 12px; color: var(--text2); line-height: 1.5;
+}
+
+/* ── Alert Banner ── */
+.alert-banner {
+  background: linear-gradient(135deg, rgba(244,63,94,0.08), rgba(244,63,94,0.04));
+  border: 1px solid rgba(244,63,94,0.25); border-radius: 11px;
+  padding: 13px 16px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+}
+.alert-banner-icon { font-size: 22px; flex-shrink: 0; }
+.alert-banner h4 { font-size: 14px; font-weight: 700; color: var(--danger); }
+.alert-banner p { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* ── Tags / Badges ── */
+.tag {
+  display: inline-flex; align-items: center; padding: 3px 9px;
+  border-radius: 6px; font-size: 12px; font-weight: 700;
+}
+.t-green { background: rgba(16,185,129,0.12); color: var(--success); }
+.t-red { background: rgba(244,63,94,0.12); color: var(--danger); }
+.t-yellow { background: rgba(245,158,11,0.12); color: var(--warn); }
+.t-blue { background: rgba(59,130,246,0.12); color: var(--info); }
+.t-gray { background: rgba(138,163,199,0.1); color: var(--text2); }
+.t-violet { background: rgba(124,58,237,0.12); color: #a78bfa; }
+.t-cyan { background: rgba(0,229,176,0.1); color: var(--accent); }
+
+/* ── Table ── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left; font-size: 11px; font-weight: 700; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.8px; padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+td { padding: 12px 14px; font-size: 14px; border-bottom: 1px solid rgba(27,46,75,0.5); }
+tr:hover td { background: rgba(255,255,255,0.02); }
+tr:last-child td { border-bottom: none; }
+
+/* ── Avatar ── */
+.av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: var(--bg); flex-shrink: 0;
+}
+.av-row { display: flex; align-items: center; gap: 10px; }
+
+/* ── Risk Score Bar ── */
+.risk-bar { display: flex; align-items: center; gap: 8px; }
+.risk-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.risk-fill { height: 100%; border-radius: 3px; transition: width .6s; }
+.risk-num { font-size: 12px; font-weight: 700; width: 32px; text-align: right; }
+
+/* ── Chart Bar ── */
+.cbar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 13px; }
+.cbar-label { width: 110px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cbar-track { flex: 1; height: 7px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.cbar-fill { height: 100%; border-radius: 4px; transition: width .8s ease; }
+.cbar-val { width: 38px; text-align: right; font-weight: 700; font-size: 12px; }
+
+/* ── Progress ── */
+.progress { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 10px; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width .6s; }
+
+/* ── Timeline ── */
+.timeline { display: flex; flex-direction: column; }
+.tl-item { display: flex; gap: 12px; padding-bottom: 16px; position: relative; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.tl-line { position: absolute; left: 4px; top: 14px; bottom: 0; width: 1px; background: var(--border); }
+.tl-item:last-child .tl-line { display: none; }
+.tl-text { font-size: 13px; line-height: 1.4; }
+.tl-time { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* ── Calendar ── */
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 3px; }
+.cal-head { text-align: center; font-size: 10px; font-weight: 700; color: var(--text3); padding: 5px 0; text-transform: uppercase; letter-spacing: 0.5px; }
+.cal-day {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; border-radius: 7px; cursor: pointer; transition: all .15s;
+  color: var(--text2); position: relative;
+}
+.cal-day:hover { background: var(--bg3); color: var(--text); }
+.cal-day.today { background: rgba(0,229,176,0.12); color: var(--accent); font-weight: 800; }
+.cal-day.has-event::after {
+  content:''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%; background: var(--warn);
+}
+.cal-day.empty { cursor: default; }
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  padding: 20px; backdrop-filter: blur(6px);
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal {
+  background: var(--bg1); border: 1px solid var(--border2);
+  border-radius: 18px; padding: 28px; max-width: 580px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  animation: slideUp .25s ease;
+}
+@keyframes slideUp { from{transform:translateY(20px);opacity:0} to{transform:translateY(0);opacity:1} }
+.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.modal-header h3 { font-family: var(--font-head); font-size: 20px; font-weight: 700; }
+.modal-lg { max-width: 760px; }
+
+/* ── Form ── */
+.fg { margin-bottom: 15px; }
+.fg label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.fc {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 9px; padding: 10px 13px; color: var(--text);
+  font-size: 14px; font-family: var(--font-body); outline: none;
+  transition: border-color .2s;
+}
+.fc:focus { border-color: var(--accent); }
+select.fc option { background: var(--bg2); }
+textarea.fc { resize: vertical; min-height: 80px; }
+.fr { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── Doc Preview ── */
+.doc-preview {
+  background: #0d1829; border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; font-family: 'Courier New', monospace;
+  font-size: 12px; color: var(--text2); white-space: pre-wrap;
+  max-height: 480px; overflow-y: auto; line-height: 1.7;
+}
+
+/* ── EPI Card ── */
+.epi-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: 13px; padding: 16px; transition: all .2s;
+}
+.epi-card:hover { border-color: var(--border2); }
+.epi-stock-bar { margin-top: 10px; }
+.epi-qty { font-family: var(--font-head); font-size: 26px; font-weight: 700; }
+
+/* ── Trein Card ── */
+.tr-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: 13px; padding: 18px; transition: all .2s;
+}
+.tr-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.tr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
+.tr-meta { }
+.tr-meta-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; }
+.tr-meta-value { font-size: 13px; color: var(--text2); margin-top: 2px; }
+
+/* ── Topbar Loader ── */
+.loader { display: none; width: 20px; height: 20px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ── */
+@media(max-width:1300px) { .g4 { grid-template-columns: repeat(2,1fr); } .g3 { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:900px) { .g2, .g2-1 { grid-template-columns: 1fr; } .g3 { grid-template-columns: 1fr; } }
+
+/* ── Tooltip ── */
+[data-tip] { position: relative; }
+[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  background: var(--bg3); border: 1px solid var(--border2);
+  color: var(--text); font-size: 11px; padding: 4px 8px; border-radius: 6px;
+  white-space: nowrap; z-index: 999; pointer-events: none;
+}
+
+/* ── Toast ── */
+#toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  background: var(--bg2); border: 1px solid var(--accent);
+  color: var(--text); padding: 12px 18px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; display: none;
+  animation: toastIn .3s ease; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+@keyframes toastIn { from{transform:translateY(10px);opacity:0} to{transform:translateY(0);opacity:1} }
+</style>
+</head>
+<body>
+
+<div id="toast">✓ Operação realizada</div>
+
+<div class="shell">
+<!-- ══ SIDEBAR ══════════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-badge">
+      <div class="sb-logo-icon">S</div>
+      <span class="sb-logo-text">SESMT PRO</span>
+    </div>
+    <h1>Segurança <span>Inteligente</span></h1>
+    <p>Plataforma v2.0 · IA Engine</p>
+  </div>
+
+  <div class="sb-empresa">
+    <label>Empresa Ativa</label>
+    <select id="empresaSelect" onchange="trocarEmpresa(this.value)">
+      <option value="">Carregando...</option>
+    </select>
+  </div>
+
+  <nav class="sb-nav">
+    <div class="sb-section">
+      <div class="sb-section-title">Principal</div>
+      <div class="sb-item active" onclick="navTo('dashboard',this)">
+        <span class="ico">📊</span> Dashboard
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Operações</div>
+      <div class="sb-item" onclick="navTo('funcionarios',this)">
+        <span class="ico">👷</span> Funcionários
+      </div>
+      <div class="sb-item" onclick="navTo('aso',this)">
+        <span class="ico">📋</span> ASO & Exames
+        <span class="sb-badge" id="sb-aso-badge" style="display:none">0</span>
+      </div>
+      <div class="sb-item" onclick="navTo('agendamentos',this)">
+        <span class="ico">📅</span> Agendamentos
+      </div>
+      <div class="sb-item" onclick="navTo('epis',this)">
+        <span class="ico">🦺</span> EPIs & Estoque
+        <span class="sb-badge warn" id="sb-epi-badge" style="display:none">!</span>
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Segurança</div>
+      <div class="sb-item" onclick="navTo('cats',this)">
+        <span class="ico">⚠️</span> Acidentes (CAT)
+      </div>
+      <div class="sb-item" onclick="navTo('treinamentos',this)">
+        <span class="ico">🎓</span> Treinamentos
+      </div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-title">Inteligência Artificial</div>
+      <div class="sb-item" onclick="navTo('ia',this)">
+        <span class="ico">🤖</span> Análise Preditiva
+      </div>
+      <div class="sb-item" onclick="navTo('documentos',this)">
+        <span class="ico">📄</span> Laudos Automáticos
+      </div>
+    </div>
+  </nav>
+
+  <div class="sb-footer">
+    <div class="sb-user">
+      <div class="sb-avatar">MS</div>
+      <div>
+        <div class="sb-user-name">Mariana Souza</div>
+        <div class="sb-user-role">Téc. de Segurança · SESMT</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══ MAIN ═══════════════════════════════════════════ -->
+<main class="main">
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-title" id="topbarTitle">Dashboard SESMT</div>
+    <div class="topbar-search">
+      <span>🔍</span>
+      <input type="text" placeholder="Buscar funcionário, treinamento..." id="globalSearch" oninput="handleSearch(this.value)">
+    </div>
+    <div class="topbar-right">
+      <div class="loader" id="loader"></div>
+      <div class="ia-badge">
+        <div class="ia-dot"></div> IA Ativa
+      </div>
+      <div class="topbar-btn" onclick="navTo('ia',null)" data-tip="Análise Preditiva">🤖</div>
+      <div class="topbar-btn" id="notifBtn" onclick="navTo('dashboard',null)" data-tip="Alertas">
+        🔔<span class="notif-dot" id="notifDot"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ══════════════════════════════
+         PAGE: DASHBOARD
+    ══════════════════════════════ -->
+    <div class="page active" id="page-dashboard">
+      <div class="ph">
+        <div>
+          <h2>Painel de Controle</h2>
+          <p id="dash-subtitle">Carregando dados...</p>
+        </div>
+        <div class="ph-actions">
+          <button class="btn btn-ghost btn-sm" onclick="loadDashboard()">↻ Atualizar</button>
+          <button class="btn btn-accent btn-sm" onclick="navTo('ia',null)">🤖 Ver IA</button>
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid g4" id="kpiGrid" style="margin-bottom:20px">
+        <div class="kpi"><div class="kpi-icon" style="background:rgba(0,229,176,0.1)">⏳</div><div class="kpi-value">—</div><div class="kpi-label">Carregando...</div></div>
+      </div>
+
+      <!-- Alert Banner -->
+      <div id="alertBanner" style="display:none"></div>
+
+      <!-- Row 2 -->
+      <div class="grid g3" style="margin-bottom:18px">
+        <div class="card" id="setoresCard">
+          <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:16px">👥 Funcionários por Setor</h4>
+          <div id="setoresChart">—</div>
+        </div>
+        <div class="ia-card" id="iaPreviewCard">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px">🤖 Análise de Risco IA</h4>
+            <span class="tag t-violet">PREDITIVO</span>
+          </div>
+          <div id="iaPreviewContent">—</div>
+        </div>
+        <div class="card">
+          <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:16px">🔔 Alertas Ativos</h4>
+          <div id="alertasTimeline">—</div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="grid g2">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px">📅 Próximos Agendamentos</h4>
+            <button class="btn btn-ghost btn-xs" onclick="navTo('agendamentos',null)">Ver todos →</button>
+          </div>
+          <div id="dashAgendamentos">—</div>
+        </div>
+        <div class="card">
+          <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:14px" id="calTitle">📆 Calendário</h4>
+          <div class="cal-grid" id="calGrid">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: FUNCIONÁRIOS
+    ══════════════════════════════ -->
+    <div class="page" id="page-funcionarios">
+      <div class="ph">
+        <div><h2>Funcionários</h2><p id="fun-count">—</p></div>
+        <div class="ph-actions">
+          <button class="btn btn-accent" onclick="openModal('modal-fun')">+ Novo Funcionário</button>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <input class="fc" style="max-width:360px" placeholder="🔍 Buscar nome, cargo, setor..." id="funSearch" oninput="loadFuncionarios(currentEmpresa,this.value)">
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Funcionário</th><th>Cargo</th><th>Setor</th><th>Risco Ocupacional</th><th>Score IA</th><th>ASO</th><th>Status</th></tr></thead>
+            <tbody id="funTable">
+              <tr><td colspan="7" style="text-align:center;color:var(--text3);padding:30px">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: ASO
+    ══════════════════════════════ -->
+    <div class="page" id="page-aso">
+      <div class="ph">
+        <div><h2>ASO & Exames Ocupacionais</h2><p>Controle de Atestados de Saúde</p></div>
+        <button class="btn btn-accent" onclick="openModal('modal-ag')">+ Agendar Exame</button>
+      </div>
+      <div class="grid g3" id="asoGrupos" style="margin-bottom:22px">—</div>
+      <div class="card">
+        <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:16px">Todos os ASOs</h4>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Funcionário</th><th>Cargo</th><th>Setor</th><th>Risco</th><th>Vencimento</th><th>Status</th></tr></thead>
+            <tbody id="asoTable">—</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: AGENDAMENTOS
+    ══════════════════════════════ -->
+    <div class="page" id="page-agendamentos">
+      <div class="ph">
+        <div><h2>Agendamentos</h2><p id="ag-count">—</p></div>
+        <button class="btn btn-accent" onclick="openModal('modal-ag')">+ Novo Agendamento</button>
+      </div>
+      <div class="grid g4" id="agKpis" style="margin-bottom:20px">—</div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Funcionário</th><th>Tipo</th><th>Data</th><th>Hora</th><th>Médico</th><th>Status</th><th>Ações</th></tr></thead>
+            <tbody id="agTable">—</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: EPIs
+    ══════════════════════════════ -->
+    <div class="page" id="page-epis">
+      <div class="ph">
+        <div><h2>EPIs & Estoque</h2><p>Controle de Equipamentos de Proteção Individual</p></div>
+        <button class="btn btn-accent" onclick="openModal('modal-epi')">+ Novo EPI</button>
+      </div>
+      <div class="grid g4" id="epiGrid">—</div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: CATS
+    ══════════════════════════════ -->
+    <div class="page" id="page-cats">
+      <div class="ph">
+        <div><h2>Acidentes de Trabalho</h2><p>Comunicação de Acidente do Trabalho — CAT</p></div>
+        <button class="btn btn-accent" onclick="openModal('modal-cat')">+ Registrar CAT</button>
+      </div>
+      <div class="grid g4" id="catKpis" style="margin-bottom:20px">—</div>
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Funcionário</th><th>Data</th><th>Tipo</th><th>Parte</th><th>Gravidade</th><th>Causa Raiz</th><th>Status</th><th>Ação</th></tr></thead>
+            <tbody id="catTable">—</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: TREINAMENTOS
+    ══════════════════════════════ -->
+    <div class="page" id="page-treinamentos">
+      <div class="ph">
+        <div><h2>Treinamentos de Segurança</h2><p id="tr-count">—</p></div>
+        <button class="btn btn-accent" onclick="openModal('modal-tr')">+ Novo Treinamento</button>
+      </div>
+      <div class="grid g4" id="trKpis" style="margin-bottom:20px">—</div>
+      <div class="grid g2" id="trCards">—</div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: IA PREDITIVA
+    ══════════════════════════════ -->
+    <div class="page" id="page-ia">
+      <div class="ph">
+        <div><h2>🤖 Análise Preditiva IA</h2><p>Engine de Inteligência Artificial para prevenção de acidentes</p></div>
+        <button class="btn btn-violet" onclick="loadIA()">↻ Atualizar Análise</button>
+      </div>
+      <div class="grid g2" style="margin-bottom:20px">
+        <div class="ia-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+            <h4 style="font-family:var(--font-head);font-weight:700;font-size:18px">Previsão de Acidentes</h4>
+            <span class="tag t-violet">MODELO ML</span>
+          </div>
+          <div id="iaBigScore" style="text-align:center;padding:20px 0">—</div>
+          <div id="iaDetails">—</div>
+        </div>
+        <div class="card">
+          <h4 style="font-family:var(--font-head);font-weight:700;font-size:16px;margin-bottom:16px">🎯 Top 5 Funcionários de Alto Risco</h4>
+          <div id="iaTopRisco">—</div>
+        </div>
+      </div>
+      <div class="card">
+        <h4 style="font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:16px">📊 Distribuição de Score de Risco</h4>
+        <div id="iaRiscoDist">—</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PAGE: DOCUMENTOS
+    ══════════════════════════════ -->
+    <div class="page" id="page-documentos">
+      <div class="ph">
+        <div><h2>📄 Laudos Automáticos</h2><p>Geração inteligente de documentos regulatórios</p></div>
+      </div>
+      <div class="grid g2" style="margin-bottom:20px">
+        <div class="card card-hover card-glow" style="cursor:pointer" onclick="gerarPCSMO()">
+          <div style="font-size:36px;margin-bottom:12px">🏥</div>
+          <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;margin-bottom:8px">PCMSO</h3>
+          <p style="color:var(--text2);font-size:13px;line-height:1.5">Programa de Controle Médico de Saúde Ocupacional — NR-7. Gerado automaticamente com base nos dados dos funcionários e histórico de exames.</p>
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <span class="tag t-cyan">NR-7</span>
+            <span class="tag t-green">IA Assistida</span>
+          </div>
+        </div>
+        <div class="card card-hover card-glow" style="cursor:pointer" onclick="gerarPGR()">
+          <div style="font-size:36px;margin-bottom:12px">🛡️</div>
+          <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;margin-bottom:8px">PGR</h3>
+          <p style="color:var(--text2);font-size:13px;line-height:1.5">Programa de Gerenciamento de Riscos — NR-1. Análise automática de perigos, avaliação de riscos e plano de ação com dados em tempo real.</p>
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <span class="tag t-cyan">NR-1</span>
+            <span class="tag t-green">IA Assistida</span>
+          </div>
+        </div>
+      </div>
+      <div id="docPreviewArea"></div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /shell -->
+
+<!-- ══ MODALS ══════════════════════════════════════════ -->
+
+<!-- Modal: Funcionário -->
+<div class="modal-overlay" id="modal-fun" style="display:none" onclick="closeModalOutside(event,'modal-fun')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>👷 Novo Funcionário</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-fun')">✕</button>
+    </div>
+    <form id="formFun">
+      <div class="fr">
+        <div class="fg"><label>Nome Completo</label><input class="fc" name="nome" placeholder="Nome completo" required></div>
+        <div class="fg"><label>CPF</label><input class="fc" name="cpf" placeholder="000.000.000-00"></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Cargo</label><input class="fc" name="cargo" placeholder="Ex: Soldador" required></div>
+        <div class="fg"><label>Setor</label>
+          <select class="fc" name="setor" required>
+            <option value="">Selecione</option>
+            <option>Produção</option><option>Manutenção</option><option>Logística</option>
+            <option>Administrativo</option><option>SESMT</option><option>Qualidade</option><option>TI</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Risco Ocupacional</label>
+          <select class="fc" name="risco" required>
+            <option value="">Selecione</option>
+            <option>Baixo</option><option>Medio</option><option>Alto</option>
+          </select>
+        </div>
+        <div class="fg"><label>Data de Admissão</label><input type="date" class="fc" name="admissao" required></div>
+      </div>
+      <div class="fg"><label>Vencimento do ASO</label><input type="date" class="fc" name="aso_vencimento" required></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-fun')">Cancelar</button>
+        <button type="submit" class="btn btn-accent">Cadastrar Funcionário</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: CAT -->
+<div class="modal-overlay" id="modal-cat" style="display:none" onclick="closeModalOutside(event,'modal-cat')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>⚠️ Registrar CAT</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-cat')">✕</button>
+    </div>
+    <form id="formCAT">
+      <div class="fg"><label>Funcionário</label><input class="fc" name="funcionario_nome" placeholder="Nome do funcionário" required></div>
+      <div class="fr">
+        <div class="fg"><label>Data do Acidente</label><input type="date" class="fc" name="data_acidente" required></div>
+        <div class="fg"><label>Tipo</label>
+          <select class="fc" name="tipo" required>
+            <option value="">Selecione</option>
+            <option>Típico</option><option>Trajeto</option><option>Doença Ocupacional</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Parte do Corpo</label><input class="fc" name="parte_corpo" placeholder="Ex: Mão direita" required></div>
+        <div class="fg"><label>Gravidade</label>
+          <select class="fc" name="gravidade" required>
+            <option value="">Selecione</option>
+            <option>Leve</option><option>Moderado</option><option>Grave</option><option>Fatal</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Descrição do Acidente</label><textarea class="fc" name="descricao" placeholder="Descreva o que ocorreu..."></textarea></div>
+      <div class="fg"><label>Causa Raiz Identificada</label><input class="fc" name="causa_raiz" placeholder="Ex: Falta de EPI, ambiente inadequado..."></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-cat')">Cancelar</button>
+        <button type="submit" class="btn btn-accent">Registrar CAT</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Agendamento -->
+<div class="modal-overlay" id="modal-ag" style="display:none" onclick="closeModalOutside(event,'modal-ag')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📅 Novo Agendamento</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-ag')">✕</button>
+    </div>
+    <form id="formAg">
+      <div class="fg"><label>Funcionário</label><input class="fc" name="funcionario_nome" placeholder="Nome do funcionário" required></div>
+      <div class="fg"><label>Tipo de Exame</label>
+        <select class="fc" name="tipo_exame" required>
+          <option value="">Selecione</option>
+          <option>ASO Admissional</option><option>ASO Periódico</option><option>ASO Demissional</option>
+          <option>Retorno ao Trabalho</option><option>Mudança de Função</option>
+        </select>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Data</label><input type="date" class="fc" name="data_agendamento" required></div>
+        <div class="fg"><label>Horário</label><input type="time" class="fc" name="hora" required></div>
+      </div>
+      <div class="fg"><label>Médico Responsável</label><input class="fc" name="medico" placeholder="Nome do médico/clínica"></div>
+      <div class="fg"><label>Observações</label><textarea class="fc" name="observacoes" placeholder="Informações adicionais..."></textarea></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-ag')">Cancelar</button>
+        <button type="submit" class="btn btn-accent">Agendar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Treinamento -->
+<div class="modal-overlay" id="modal-tr" style="display:none" onclick="closeModalOutside(event,'modal-tr')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🎓 Novo Treinamento</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-tr')">✕</button>
+    </div>
+    <form id="formTr">
+      <div class="fg"><label>Nome do Treinamento</label><input class="fc" name="nome" placeholder="Ex: NR-35 Trabalho em Altura" required></div>
+      <div class="fr">
+        <div class="fg"><label>NR de Referência</label><input class="fc" name="nr_referencia" placeholder="Ex: NR-35"></div>
+        <div class="fg"><label>Modalidade</label>
+          <select class="fc" name="modalidade">
+            <option>Presencial</option><option>EAD</option><option>Híbrido</option>
+          </select>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Data de Realização</label><input type="date" class="fc" name="data_realizacao" required></div>
+        <div class="fg"><label>Data de Validade</label><input type="date" class="fc" name="data_validade" required></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Nº de Participantes</label><input type="number" class="fc" name="participantes" placeholder="0" min="0"></div>
+        <div class="fg"><label>Status</label>
+          <select class="fc" name="status">
+            <option>Agendado</option><option>Em Andamento</option><option>Concluído</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Responsável / Instrutor</label><input class="fc" name="responsavel" placeholder="Nome do instrutor"></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-tr')">Cancelar</button>
+        <button type="submit" class="btn btn-accent">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: EPI -->
+<div class="modal-overlay" id="modal-epi" style="display:none" onclick="closeModalOutside(event,'modal-epi')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>🦺 Novo EPI</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-epi')">✕</button>
+    </div>
+    <form id="formEpi">
+      <div class="fr">
+        <div class="fg"><label>Nome do EPI</label><input class="fc" name="nome" placeholder="Ex: Capacete de Segurança" required></div>
+        <div class="fg"><label>Número do CA</label><input class="fc" name="ca" placeholder="CA-00000"></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label>Quantidade em Estoque</label><input type="number" class="fc" name="quantidade" placeholder="0" min="0" required></div>
+        <div class="fg"><label>Estoque Mínimo</label><input type="number" class="fc" name="estoque_minimo" placeholder="5" min="0"></div>
+      </div>
+      <div class="fg"><label>Validade</label><input type="date" class="fc" name="validade"></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-epi')">Cancelar</button>
+        <button type="submit" class="btn btn-accent">Cadastrar EPI</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Doc Preview -->
+<div class="modal-overlay" id="modal-doc" style="display:none" onclick="closeModalOutside(event,'modal-doc')">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3 id="docModalTitle">📄 Laudo Gerado</h3>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-accent btn-sm" onclick="imprimirDoc()">🖨️ Imprimir</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-doc')">✕</button>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:12px">Documento gerado automaticamente pela IA do SESMT PRO com base nos dados cadastrados.</p>
+    <div class="doc-preview" id="docContent">—</div>
+  </div>
+</div>
+
+<!-- ══ SCRIPTS ══════════════════════════════════════════ -->
+<script>
+const API = '';
+let currentEmpresa = 1;
+
+// ── Init ──────────────────────────────────────────────
+async function init() {
+  await loadEmpresas();
+  await loadDashboard();
+}
+
+// ── Empresas ──────────────────────────────────────────
+async function loadEmpresas() {
+  const res = await fetch(`${API}/api/empresas`);
+  const data = await res.json();
+  const sel = document.getElementById('empresaSelect');
+  sel.innerHTML = data.map(e => `<option value="${e.id}">${e.nome}</option>`).join('');
+  if (data.length) currentEmpresa = data[0].id;
+}
+
+function trocarEmpresa(id) {
+  currentEmpresa = parseInt(id);
+  const page = document.querySelector('.page.active')?.id?.replace('page-','');
+  if (page) refreshPage(page);
+}
+
+function refreshPage(page) {
+  if (page === 'dashboard') loadDashboard();
+  else if (page === 'funcionarios') loadFuncionarios(currentEmpresa);
+  else if (page === 'aso') loadASO();
+  else if (page === 'agendamentos') loadAgendamentos();
+  else if (page === 'cats') loadCATs();
+  else if (page === 'treinamentos') loadTreinamentos();
+  else if (page === 'epis') loadEPIs();
+  else if (page === 'ia') loadIA();
+}
+
+// ── Navigation ────────────────────────────────────────
+function navTo(page, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${page}`).classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  else {
+    document.querySelectorAll('.sb-item').forEach(i => {
+      if (i.getAttribute('onclick')?.includes(`'${page}'`)) i.classList.add('active');
+    });
+  }
+  const titles = {
+    dashboard:'Dashboard SESMT', funcionarios:'Funcionários',
+    aso:'ASO & Exames', agendamentos:'Agendamentos',
+    cats:'Acidentes (CAT)', treinamentos:'Treinamentos',
+    ia:'Análise Preditiva IA', documentos:'Laudos Automáticos', epis:'EPIs & Estoque'
+  };
+  document.getElementById('topbarTitle').textContent = titles[page] || 'SESMT PRO';
+  refreshPage(page);
+}
+
+// ── Loader ────────────────────────────────────────────
+function loading(show) {
+  document.getElementById('loader').style.display = show ? 'block' : 'none';
+}
+
+// ── Toast ─────────────────────────────────────────────
+function toast(msg, color='var(--accent)') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.borderColor = color;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2800);
+}
+
+// ── Search ────────────────────────────────────────────
+let searchTimer;
+function handleSearch(v) {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const page = document.querySelector('.page.active')?.id?.replace('page-','');
+    if (page === 'funcionarios') loadFuncionarios(currentEmpresa, v);
+  }, 300);
+}
+
+// ── Helpers ───────────────────────────────────────────
+function tagClass(status, type='aso') {
+  if (type === 'aso') {
+    if (status === 'valido') return 't-green';
+    if (status === 'vencido') return 't-red';
+    if (status === 'a_vencer') return 't-yellow';
+    return 't-gray';
+  }
+  if (type === 'risco') {
+    if (status === 'Alto') return 't-red';
+    if (status === 'Medio') return 't-yellow';
+    return 't-green';
+  }
+  if (type === 'status') {
+    if (status === 'Concluído' || status === 'Confirmado' || status === 'Registrado') return 't-green';
+    if (status === 'Agendado' || status === 'Aguardando') return 't-blue';
+    if (status === 'Em análise' || status === 'Em Andamento') return 't-yellow';
+    if (status === 'Encerrado') return 't-gray';
+    return 't-gray';
+  }
+  if (type === 'grav') {
+    if (status === 'Fatal') return 't-violet';
+    if (status === 'Grave') return 't-red';
+    if (status === 'Moderado') return 't-yellow';
+    return 't-green';
+  }
+  return 't-gray';
+}
+
+function scoreColor(s) {
+  if (s >= 70) return 'var(--danger)';
+  if (s >= 40) return 'var(--warn)';
+  return 'var(--success)';
+}
+
+function asoLabel(s) {
+  if (s === 'valido') return 'Válido';
+  if (s === 'vencido') return 'Vencido';
+  if (s === 'a_vencer') return 'A Vencer';
+  return s;
+}
+
+function initials(n) { return (n||'?').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase(); }
+
+// ── DASHBOARD ─────────────────────────────────────────
+async function loadDashboard() {
+  loading(true);
+  try {
+    const res = await fetch(`${API}/api/dashboard/${currentEmpresa}`);
+    const d = await res.json();
+    renderKPIs(d.kpis);
+    renderAlertBanner(d.kpis);
+    renderSetoresChart(d.setores);
+    renderIAPreview(d.ia);
+    renderAlertasTimeline(d.alertas);
+    renderDashAgendamentos(d.agendamentos);
+    renderCalendar(d.agendamentos);
+    document.getElementById('dash-subtitle').textContent =
+      `${d.empresa.nome} · ${d.kpis.total_funcionarios} funcionários`;
+
+    const badgeV = d.kpis.aso_vencidos + d.kpis.aso_vencer;
+    const badge = document.getElementById('sb-aso-badge');
+    if (badgeV > 0) { badge.textContent = badgeV; badge.style.display=''; }
+    else badge.style.display = 'none';
+
+    const epiBadge = document.getElementById('sb-epi-badge');
+    epiBadge.style.display = d.kpis.epis_criticos > 0 ? '' : 'none';
+    document.getElementById('notifDot').style.display = d.alertas.length ? '' : 'none';
+  } catch(e) { console.error(e); }
+  loading(false);
+}
+
+function renderKPIs(k) {
+  const kpis = [
+    { icon:'👷', label:'Funcionários', value:k.total_funcionarios, sub:'Total ativo', dir:'up', color:'var(--accent)', bg:'rgba(0,229,176,0.08)' },
+    { icon:'📋', label:'ASOs Vencidos', value:k.aso_vencidos, sub:'Requer ação urgente', dir:'down', color:'var(--danger)', bg:'rgba(244,63,94,0.08)' },
+    { icon:'⚠️', label:'CATs Registradas', value:k.total_cats, sub:'Total histórico', dir:'', color:'var(--warn)', bg:'rgba(245,158,11,0.08)' },
+    { icon:'🛡️', label:'Índice de Segurança', value:k.score_seguranca+'%', sub:'Score médio IA', dir:'up', color:'var(--accent2)', bg:'rgba(0,184,217,0.08)' },
+    { icon:'🎓', label:'Treinamentos', value:k.treinamentos, sub:`${k.trein_concluidos} concluídos`, dir:'up', color:'var(--info)', bg:'rgba(59,130,246,0.08)' },
+    { icon:'📅', label:'Agend. Pendentes', value:k.agendamentos_pendentes, sub:'Aguardando confirmação', dir:'', color:'#a78bfa', bg:'rgba(124,58,237,0.08)' },
+    { icon:'🔴', label:'Alto Risco', value:k.alto_risco, sub:'Funcionários críticos', dir:'down', color:'var(--danger)', bg:'rgba(244,63,94,0.06)' },
+    { icon:'🦺', label:'EPIs Críticos', value:k.epis_criticos, sub:'Estoque abaixo do mín.', dir: k.epis_criticos > 0 ? 'down':'up', color: k.epis_criticos>0?'var(--warn)':'var(--success)', bg:'rgba(245,158,11,0.06)' },
+  ];
+  document.getElementById('kpiGrid').style.gridTemplateColumns = 'repeat(4,1fr)';
+  document.getElementById('kpiGrid').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="kpi-icon" style="background:${k.bg};color:${k.color}">${k.icon}</div>
+      <div class="kpi-value" style="color:${k.color}">${k.value}</div>
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-sub ${k.dir}">${k.dir==='up'?'▲':k.dir==='down'?'▼':''} ${k.sub}</div>
+    </div>
+  `).join('');
+}
+
+function renderAlertBanner(k) {
+  const el = document.getElementById('alertBanner');
+  if (k.aso_vencidos > 0) {
+    el.style.display = 'flex';
+    el.innerHTML = `
+      <span class="alert-banner-icon">🚨</span>
+      <div><h4>Atenção Requerida</h4><p>${k.aso_vencidos} ASO(s) vencido(s) e ${k.aso_vencer} próximo(s) do vencimento. Agendar renovação urgente.</p></div>
+      <button class="btn btn-danger btn-sm" onclick="navTo('aso',null)">Ver ASOs →</button>
+    `;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function renderSetoresChart(setores) {
+  const entries = Object.entries(setores).sort((a,b)=>b[1]-a[1]);
+  const max = entries[0]?.[1] || 1;
+  const colors = ['var(--accent)','var(--accent2)','var(--info)','#a78bfa','var(--warn)','var(--success)'];
+  document.getElementById('setoresChart').innerHTML = entries.map(([s,n],i)=>`
+    <div class="cbar-row">
+      <div class="cbar-label">${s}</div>
+      <div class="cbar-track"><div class="cbar-fill" style="width:${(n/max*100)}%;background:${colors[i%colors.length]}"></div></div>
+      <div class="cbar-val" style="color:${colors[i%colors.length]}">${n}</div>
+    </div>
+  `).join('');
+}
+
+function renderIAPreview(ia) {
+  const prob = ia.probabilidade_acidente;
+  const color = prob > 50 ? 'var(--danger)' : prob > 30 ? 'var(--warn)' : 'var(--success)';
+  const circumference = 2 * Math.PI * 38;
+  const offset = circumference - (prob / 100) * circumference;
+  document.getElementById('iaPreviewContent').innerHTML = `
+    <div class="ring-row">
+      <div class="ia-score-ring">
+        <svg width="96" height="96" viewBox="0 0 96 96">
+          <circle cx="48" cy="48" r="38" fill="none" stroke="var(--border)" stroke-width="5"/>
+          <circle cx="48" cy="48" r="38" fill="none" stroke="${color}" stroke-width="5"
+            stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+        </svg>
+        <div><div class="ia-score-value" style="color:${color}">${prob}%</div><span class="ia-score-unit">RISCO</span></div>
+      </div>
+      <div class="ia-details">
+        <div class="ia-detail-row"><span class="ia-detail-label">Tendência</span><span class="ia-detail-value">${ia.tendencia}</span></div>
+        <div class="ia-detail-row"><span class="ia-detail-label">Setor Crítico</span><span class="ia-detail-value" style="color:var(--warn)">${ia.setor_mais_critico}</span></div>
+        <div class="ia-detail-row"><span class="ia-detail-label">Índice Segurança</span><span class="ia-detail-value" style="color:var(--success)">${ia.indice_seguranca}%</span></div>
+      </div>
+    </div>
+    <div class="ia-rec">💡 ${ia.recomendacao}</div>
+  `;
+}
+
+function renderAlertasTimeline(alertas) {
+  if (!alertas.length) {
+    document.getElementById('alertasTimeline').innerHTML = '<div style="color:var(--text3);font-size:13px">✅ Nenhum alerta ativo</div>';
+    return;
+  }
+  const colors = { alta:'var(--danger)', media:'var(--warn)', baixa:'var(--info)' };
+  document.getElementById('alertasTimeline').innerHTML = `<div class="timeline">` +
+    alertas.map(a => `
+      <div class="tl-item">
+        <div class="tl-dot" style="background:${colors[a.prioridade]||'var(--text3)'}"></div>
+        <div class="tl-line"></div>
+        <div>
+          <div class="tl-text">${a.titulo}</div>
+          <div class="tl-time">${a.mensagem.slice(0,60)}...</div>
+        </div>
+      </div>
+    `).join('') + `</div>`;
+}
+
+function renderDashAgendamentos(ags) {
+  if (!ags.length) {
+    document.getElementById('dashAgendamentos').innerHTML = '<div style="color:var(--text3);font-size:13px;text-align:center;padding:20px">Nenhum agendamento</div>';
+    return;
+  }
+  document.getElementById('dashAgendamentos').innerHTML = `
+    <table>
+      <thead><tr><th>Funcionário</th><th>Tipo</th><th>Data</th><th>Status</th></tr></thead>
+      <tbody>
+        ${ags.map(a=>`
+          <tr>
+            <td style="font-weight:600">${a.funcionario_nome}</td>
+            <td><span class="tag t-blue" style="font-size:11px">${a.tipo_exame}</span></td>
+            <td style="color:var(--text3);font-size:12px">${a.data_agendamento}</td>
+            <td><span class="tag ${tagClass(a.status,'status')}" style="font-size:11px">${a.status}</span></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+function renderCalendar(agendamentos) {
+  const hoje = new Date();
+  const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  const dias = ['D','S','T','Q','Q','S','S'];
+  const primDia = new Date(hoje.getFullYear(), hoje.getMonth(), 1).getDay();
+  const diasMes = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0).getDate();
+  const agDatas = agendamentos.map(a => a.data_agendamento);
+  document.getElementById('calTitle').textContent = `📆 ${meses[hoje.getMonth()]} ${hoje.getFullYear()}`;
+  let html = dias.map(d=>`<div class="cal-head">${d}</div>`).join('');
+  html += Array(primDia).fill('<div class="cal-day empty"></div>').join('');
+  for (let i=1; i<=diasMes; i++) {
+    const ds = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+    html += `<div class="cal-day ${i===hoje.getDate()?'today':''} ${agDatas.includes(ds)?'has-event':''}">${i}</div>`;
+  }
+  document.getElementById('calGrid').innerHTML = html;
+}
+
+// ── FUNCIONÁRIOS ──────────────────────────────────────
+async function loadFuncionarios(eid = currentEmpresa, busca = '') {
+  loading(true);
+  const res = await fetch(`${API}/api/funcionarios/${eid}?busca=${encodeURIComponent(busca)}`);
+  const data = await res.json();
+  document.getElementById('fun-count').textContent = `${data.length} colaboradores encontrados`;
+  document.getElementById('funTable').innerHTML = data.length ? data.map(f => {
+    const sc = f.score_risco || 0;
+    return `
+      <tr>
+        <td><div class="av-row"><div class="av">${initials(f.nome)}</div><span style="font-weight:600">${f.nome}</span></div></td>
+        <td style="color:var(--text2)">${f.cargo}</td>
+        <td><span class="tag t-gray">${f.setor}</span></td>
+        <td><span class="tag ${tagClass(f.risco,'risco')}">${f.risco}</span></td>
+        <td>
+          <div class="risk-bar">
+            <div class="risk-track"><div class="risk-fill" style="width:${sc}%;background:${scoreColor(sc)}"></div></div>
+            <div class="risk-num" style="color:${scoreColor(sc)}">${sc}</div>
+          </div>
+        </td>
+        <td style="color:var(--text3);font-size:13px">${f.aso_vencimento}</td>
+        <td><span class="tag ${tagClass(f.aso_status)}">${asoLabel(f.aso_status)}</span></td>
+      </tr>`;
+  }).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px">Nenhum funcionário encontrado</td></tr>`;
+  loading(false);
+}
+
+// ── ASO ───────────────────────────────────────────────
+async function loadASO() {
+  loading(true);
+  const res = await fetch(`${API}/api/funcionarios/${currentEmpresa}`);
+  const funs = await res.json();
+  const grupos = [
+    { label:'🚨 ASO Vencido', status:'vencido', cls:'t-red' },
+    { label:'⚠️ A Vencer (30 dias)', status:'a_vencer', cls:'t-yellow' },
+    { label:'✅ Válido', status:'valido', cls:'t-green' },
+  ];
+  document.getElementById('asoGrupos').innerHTML = grupos.map(g => {
+    const items = funs.filter(f => f.aso_status === g.status);
+    return `
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <h4 style="font-family:var(--font-head);font-weight:700;font-size:14px">${g.label}</h4>
+          <span class="tag ${g.cls}">${items.length}</span>
+        </div>
+        ${items.length === 0
+          ? '<div style="color:var(--text3);font-size:13px">Nenhum registro</div>'
+          : items.map(f=>`
+            <div style="padding:9px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:600;font-size:13px">${f.nome}</div>
+                <div style="font-size:11px;color:var(--text3)">${f.cargo} · ${f.setor}</div>
+              </div>
+              <div style="font-size:12px;color:var(--text3)">${f.aso_vencimento}</div>
+            </div>`).join('')
+        }
+      </div>`;
+  }).join('');
+
+  document.getElementById('asoTable').innerHTML = funs.map(f=>`
+    <tr>
+      <td style="font-weight:600">${f.nome}</td>
+      <td style="color:var(--text2)">${f.cargo}</td>
+      <td>${f.setor}</td>
+      <td><span class="tag ${tagClass(f.risco,'risco')}">${f.risco}</span></td>
+      <td style="color:var(--text3);font-size:13px">${f.aso_vencimento}</td>
+      <td><span class="tag ${tagClass(f.aso_status)}">${asoLabel(f.aso_status)}</span></td>
+    </tr>`).join('');
+  loading(false);
+}
+
+// ── AGENDAMENTOS ──────────────────────────────────────
+async function loadAgendamentos() {
+  loading(true);
+  const res = await fetch(`${API}/api/agendamentos/${currentEmpresa}`);
+  const data = await res.json();
+  document.getElementById('ag-count').textContent = `${data.length} agendamentos registrados`;
+
+  const conf = data.filter(a=>a.status==='Confirmado').length;
+  const aguard = data.filter(a=>a.status==='Aguardando').length;
+  const stats = [
+    { icon:'📅', label:'Total', value:data.length, color:'var(--accent)', bg:'rgba(0,229,176,0.08)' },
+    { icon:'✅', label:'Confirmados', value:conf, color:'var(--success)', bg:'rgba(16,185,129,0.08)' },
+    { icon:'⏳', label:'Aguardando', value:aguard, color:'var(--warn)', bg:'rgba(245,158,11,0.08)' },
+  ];
+  document.getElementById('agKpis').style.gridTemplateColumns = 'repeat(3,1fr)';
+  document.getElementById('agKpis').innerHTML = stats.map(s=>`
+    <div class="kpi">
+      <div class="kpi-icon" style="background:${s.bg};color:${s.color}">${s.icon}</div>
+      <div class="kpi-value" style="color:${s.color}">${s.value}</div>
+      <div class="kpi-label">${s.label}</div>
+    </div>`).join('');
+
+  document.getElementById('agTable').innerHTML = data.map(a=>`
+    <tr>
+      <td style="font-weight:600">${a.funcionario_nome}</td>
+      <td><span class="tag t-blue" style="font-size:12px">${a.tipo_exame}</span></td>
+      <td style="color:var(--text3);font-size:13px">${a.data_agendamento}</td>
+      <td style="color:var(--text3);font-size:13px">${a.hora}</td>
+      <td style="color:var(--text2);font-size:13px">${a.medico||'—'}</td>
+      <td><span class="tag ${tagClass(a.status,'status')}">${a.status}</span></td>
+      <td>
+        <div style="display:flex;gap:6px">
+          ${a.status!=='Confirmado'?`<button class="btn btn-ghost btn-xs" onclick="confirmarAg(${a.id})" style="color:var(--success);border-color:rgba(16,185,129,0.3)">✓</button>`:''}
+          <button class="btn btn-danger btn-xs" onclick="cancelarAg(${a.id})">✕</button>
+        </div>
+      </td>
+    </tr>`).join('');
+  loading(false);
+}
+
+async function confirmarAg(id) {
+  await fetch(`${API}/api/agendamentos/${id}/confirmar`, {method:'PUT'});
+  toast('✅ Agendamento confirmado!');
+  loadAgendamentos();
+}
+async function cancelarAg(id) {
+  if (!confirm('Cancelar este agendamento?')) return;
+  await fetch(`${API}/api/agendamentos/${id}`, {method:'DELETE'});
+  toast('Agendamento cancelado.', 'var(--danger)');
+  loadAgendamentos();
+}
+
+// ── CATs ──────────────────────────────────────────────
+async function loadCATs() {
+  loading(true);
+  const res = await fetch(`${API}/api/cats/${currentEmpresa}`);
+  const data = await res.json();
+
+  const graves = data.filter(c=>c.gravidade==='Grave'||c.gravidade==='Fatal').length;
+  const emAnalise = data.filter(c=>c.status==='Em análise').length;
+  const encerrados = data.filter(c=>c.status==='Encerrado').length;
+  const catStats = [
+    { icon:'⚠️', label:'Total CATs', value:data.length, color:'var(--warn)', bg:'rgba(245,158,11,0.08)' },
+    { icon:'🔍', label:'Em Análise', value:emAnalise, color:'var(--info)', bg:'rgba(59,130,246,0.08)' },
+    { icon:'🚨', label:'Graves/Fatais', value:graves, color:'var(--danger)', bg:'rgba(244,63,94,0.08)' },
+    { icon:'✅', label:'Encerrados', value:encerrados, color:'var(--success)', bg:'rgba(16,185,129,0.08)' },
+  ];
+  document.getElementById('catKpis').style.gridTemplateColumns = 'repeat(4,1fr)';
+  document.getElementById('catKpis').innerHTML = catStats.map(s=>`
+    <div class="kpi">
+      <div class="kpi-icon" style="background:${s.bg};color:${s.color}">${s.icon}</div>
+      <div class="kpi-value" style="color:${s.color}">${s.value}</div>
+      <div class="kpi-label">${s.label}</div>
+    </div>`).join('');
+
+  document.getElementById('catTable').innerHTML = data.map(c=>`
+    <tr>
+      <td style="font-weight:600">${c.funcionario_nome}</td>
+      <td style="color:var(--text3);font-size:12px">${c.data_acidente}</td>
+      <td><span class="tag t-gray">${c.tipo}</span></td>
+      <td style="color:var(--text2)">${c.parte_corpo}</td>
+      <td><span class="tag ${tagClass(c.gravidade,'grav')}">${c.gravidade}</span></td>
+      <td style="color:var(--text3);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.causa_raiz||'—'}</td>
+      <td><span class="tag ${tagClass(c.status,'status')}">${c.status}</span></td>
+      <td>
+        ${c.status!=='Encerrado'?`<button class="btn btn-ghost btn-xs" onclick="encerrarCAT(${c.id})">Encerrar</button>`:''}
+      </td>
+    </tr>`).join('');
+  loading(false);
+}
+
+async function encerrarCAT(id) {
+  const fd = new FormData(); fd.append('status','Encerrado');
+  await fetch(`${API}/api/cats/${id}/status`, {method:'PUT', body:fd});
+  toast('CAT encerrada com sucesso.');
+  loadCATs();
+}
+
+// ── TREINAMENTOS ──────────────────────────────────────
+async function loadTreinamentos() {
+  loading(true);
+  const res = await fetch(`${API}/api/treinamentos/${currentEmpresa}`);
+  const data = await res.json();
+  document.getElementById('tr-count').textContent = `${data.length} treinamentos registrados`;
+
+  const conc = data.filter(t=>t.status==='Concluído').length;
+  const agen = data.filter(t=>t.status==='Agendado').length;
+  const part = data.reduce((s,t)=>s+(t.participantes||0),0);
+  const trStats = [
+    { icon:'🎓', label:'Total', value:data.length, color:'var(--accent)', bg:'rgba(0,229,176,0.08)' },
+    { icon:'✅', label:'Concluídos', value:conc, color:'var(--success)', bg:'rgba(16,185,129,0.08)' },
+    { icon:'📅', label:'Agendados', value:agen, color:'var(--info)', bg:'rgba(59,130,246,0.08)' },
+    { icon:'👥', label:'Participantes', value:part, color:'var(--warn)', bg:'rgba(245,158,11,0.08)' },
+  ];
+  document.getElementById('trKpis').style.gridTemplateColumns = 'repeat(4,1fr)';
+  document.getElementById('trKpis').innerHTML = trStats.map(s=>`
+    <div class="kpi">
+      <div class="kpi-icon" style="background:${s.bg};color:${s.color}">${s.icon}</div>
+      <div class="kpi-value" style="color:${s.color}">${s.value}</div>
+      <div class="kpi-label">${s.label}</div>
+    </div>`).join('');
+
+  document.getElementById('trCards').innerHTML = data.map(t=>{
+    const pct = t.status==='Concluído'?100:t.status==='Em Andamento'?55:10;
+    const pColor = t.status==='Concluído'?'var(--success)':t.status==='Em Andamento'?'var(--warn)':'var(--info)';
+    return `
+      <div class="tr-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div style="font-family:var(--font-head);font-weight:700;font-size:15px;flex:1;margin-right:10px">${t.nome}</div>
+          <span class="tag ${tagClass(t.status,'status')}">${t.status}</span>
+        </div>
+        ${t.nr_referencia?`<span class="tag t-cyan" style="margin-bottom:10px;display:inline-flex">${t.nr_referencia}</span>`:''}
+        <div class="tr-grid">
+          <div class="tr-meta"><div class="tr-meta-label">Realização</div><div class="tr-meta-value">${t.data_realizacao||'—'}</div></div>
+          <div class="tr-meta"><div class="tr-meta-label">Validade</div><div class="tr-meta-value">${t.data_validade||'—'}</div></div>
+          <div class="tr-meta"><div class="tr-meta-label">Participantes</div><div class="tr-meta-value">${t.participantes}</div></div>
+          <div class="tr-meta"><div class="tr-meta-label">Modalidade</div><div class="tr-meta-value">${t.modalidade||'—'}</div></div>
+        </div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:8px">👤 ${t.responsavel||'—'}</div>
+        <div class="progress"><div class="progress-fill" style="width:${pct}%;background:${pColor}"></div></div>
+      </div>`;
+  }).join('');
+  loading(false);
+}
+
+// ── EPIs ──────────────────────────────────────────────
+async function loadEPIs() {
+  loading(true);
+  const res = await fetch(`${API}/api/epis/${currentEmpresa}`);
+  const data = await res.json();
+  document.getElementById('epiGrid').innerHTML = data.map(e=>{
+    const critico = e.quantidade < e.estoque_minimo;
+    const pct = Math.min((e.quantidade/Math.max(e.estoque_minimo*2,1))*100, 100);
+    const color = critico ? 'var(--danger)' : e.quantidade < e.estoque_minimo*1.5 ? 'var(--warn)' : 'var(--success)';
+    return `
+      <div class="epi-card ${critico?'':''}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">
+          <div>
+            <div style="font-weight:700;font-size:14px">${e.nome}</div>
+            ${e.ca?`<div style="font-size:11px;color:var(--text3)">CA: ${e.ca}</div>`:''}
+          </div>
+          ${critico?'<span class="tag t-red">⚠️ Crítico</span>':'<span class="tag t-green">OK</span>'}
+        </div>
+        <div class="epi-qty" style="color:${color}">${e.quantidade}</div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:8px">unidades · mínimo: ${e.estoque_minimo}</div>
+        <div class="epi-stock-bar">
+          <div class="progress"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
+        </div>
+        ${e.validade?`<div style="font-size:11px;color:var(--text3);margin-top:8px">Validade: ${e.validade}</div>`:''}
+      </div>`;
+  }).join('');
+  loading(false);
+}
+
+// ── IA ────────────────────────────────────────────────
+async function loadIA() {
+  loading(true);
+  const res = await fetch(`${API}/api/ia/previsao/${currentEmpresa}`);
+  const d = await res.json();
+  const ia = d.previsao;
+  const prob = ia.probabilidade_acidente;
+  const color = prob > 50 ? 'var(--danger)' : prob > 30 ? 'var(--warn)' : 'var(--success)';
+  const circumference = 2 * Math.PI * 60;
+  const offset = circumference - (prob/100)*circumference;
+
+  document.getElementById('iaBigScore').innerHTML = `
+    <svg width="150" height="150" viewBox="0 0 150 150" style="transform:rotate(-90deg)">
+      <circle cx="75" cy="75" r="60" fill="none" stroke="var(--border)" stroke-width="8"/>
+      <circle cx="75" cy="75" r="60" fill="none" stroke="${color}" stroke-width="8"
+        stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round"/>
+    </svg>
+    <div style="margin-top:-80px;position:relative;z-index:1">
+      <div style="font-family:var(--font-head);font-size:42px;font-weight:800;color:${color}">${prob}%</div>
+      <div style="font-size:12px;color:var(--text3)">PROBABILIDADE DE ACIDENTE</div>
+      <div style="font-size:13px;color:${color};font-weight:700;margin-top:4px">${ia.tendencia}</div>
+    </div>`;
+
+  document.getElementById('iaDetails').innerHTML = `
+    <div class="ia-detail-row"><span class="ia-detail-label">Setor Mais Crítico</span><span class="ia-detail-value" style="color:var(--warn)">${ia.setor_mais_critico}</span></div>
+    <div class="ia-detail-row"><span class="ia-detail-label">Índice de Segurança</span><span class="ia-detail-value" style="color:var(--success)">${ia.indice_seguranca}%</span></div>
+    <div style="margin-top:14px;padding:12px;background:rgba(0,0,0,0.2);border-radius:10px;border-left:3px solid #a78bfa;font-size:13px;color:var(--text2);line-height:1.6">
+      💡 <strong>Recomendação IA:</strong><br>${ia.recomendacao}
+    </div>`;
+
+  document.getElementById('iaTopRisco').innerHTML = d.top_risco.map(f=>{
+    const sc = f.score_risco||0;
+    return `
+      <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+        <div class="av" style="background:linear-gradient(135deg,${scoreColor(sc)},var(--bg3))">${initials(f.nome)}</div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:13px">${f.nome}</div>
+          <div style="font-size:11px;color:var(--text3)">${f.cargo} · ${f.setor}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:var(--font-head);font-size:18px;font-weight:800;color:${scoreColor(sc)}">${sc}</div>
+          <div style="font-size:10px;color:var(--text3)">SCORE</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Distribution bars
+  const buckets = [{label:'0–20 Baixíssimo',min:0,max:20},{label:'21–40 Baixo',min:21,max:40},{label:'41–60 Médio',min:41,max:60},{label:'61–80 Alto',min:61,max:80},{label:'81–100 Crítico',min:81,max:100}];
+  const allFuns = await (await fetch(`${API}/api/funcionarios/${currentEmpresa}`)).json();
+  const maxB = Math.max(...buckets.map(b=>allFuns.filter(f=>f.score_risco>=b.min&&f.score_risco<=b.max).length),1);
+  const bColors = ['var(--success)','#34d399','var(--warn)','#f97316','var(--danger)'];
+  document.getElementById('iaRiscoDist').innerHTML = buckets.map((b,i)=>{
+    const count = allFuns.filter(f=>f.score_risco>=b.min&&f.score_risco<=b.max).length;
+    return `
+      <div class="cbar-row">
+        <div class="cbar-label">${b.label}</div>
+        <div class="cbar-track"><div class="cbar-fill" style="width:${(count/maxB)*100}%;background:${bColors[i]}"></div></div>
+        <div class="cbar-val" style="color:${bColors[i]}">${count}</div>
+      </div>`;
+  }).join('');
+  loading(false);
+}
+
+// ── DOCUMENTOS ────────────────────────────────────────
+async function gerarPCSMO() {
+  loading(true);
+  const res = await fetch(`${API}/api/documentos/pcmso/${currentEmpresa}`);
+  const d = await res.json();
+  document.getElementById('docModalTitle').textContent = '🏥 PCMSO — ' + d.empresa;
+  document.getElementById('docContent').textContent = d.conteudo;
+  openModal('modal-doc');
+  loading(false);
+}
+
+async function gerarPGR() {
+  loading(true);
+  const res = await fetch(`${API}/api/documentos/pgr/${currentEmpresa}`);
+  const d = await res.json();
+  document.getElementById('docModalTitle').textContent = '🛡️ PGR — ' + d.empresa;
+  document.getElementById('docContent').textContent = d.conteudo;
+  openModal('modal-doc');
+  loading(false);
+}
+
+function imprimirDoc() {
+  const content = document.getElementById('docContent').textContent;
+  const w = window.open('', '_blank');
+  w.document.write(`<pre style="font-family:monospace;font-size:12px;padding:24px;white-space:pre-wrap">${content}</pre>`);
+  w.print();
+}
+
+// ── MODALS ────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function closeModalOutside(e, id) { if (e.target.classList.contains('modal-overlay')) closeModal(id); }
+
+// ── FORM SUBMISSIONS ──────────────────────────────────
+function setupForms() {
+  document.getElementById('formFun').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fd.append('empresa_id', currentEmpresa);
+    await fetch(`${API}/api/funcionarios`, {method:'POST', body:fd});
+    closeModal('modal-fun'); e.target.reset();
+    toast('✅ Funcionário cadastrado com IA Score gerado!');
+    loadFuncionarios(currentEmpresa);
+  };
+
+  document.getElementById('formCAT').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fd.append('empresa_id', currentEmpresa);
+    await fetch(`${API}/api/cats`, {method:'POST', body:fd});
+    closeModal('modal-cat'); e.target.reset();
+    toast('⚠️ CAT registrada com sucesso!', 'var(--warn)');
+    loadCATs();
+  };
+
+  document.getElementById('formAg').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fd.append('empresa_id', currentEmpresa);
+    await fetch(`${API}/api/agendamentos`, {method:'POST', body:fd});
+    closeModal('modal-ag'); e.target.reset();
+    toast('📅 Agendamento criado com sucesso!');
+    loadAgendamentos();
+  };
+
+  document.getElementById('formTr').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fd.append('empresa_id', currentEmpresa);
+    await fetch(`${API}/api/treinamentos`, {method:'POST', body:fd});
+    closeModal('modal-tr'); e.target.reset();
+    toast('🎓 Treinamento cadastrado!');
+    loadTreinamentos();
+  };
+
+  document.getElementById('formEpi').onsubmit = async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    fd.append('empresa_id', currentEmpresa);
+    await fetch(`${API}/api/epis`, {method:'POST', body:fd});
+    closeModal('modal-epi'); e.target.reset();
+    toast('🦺 EPI cadastrado!');
+    loadEPIs();
+  };
+}
+
+// ── Boot ──────────────────────────────────────────────
+setupForms();
+init();
+</script>
+</body>
+</html>
