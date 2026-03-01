@@ -19,14 +19,6 @@ from fastapi.templating import Jinja2Templates
 app = FastAPI(title="Psico Pro", version="3.2.0")
 
 BASE_DIR = Path(__file__).parent
-STATIC_DIR = BASE_DIR / "static"
-if not STATIC_DIR.exists():
-    try:
-        STATIC_DIR.mkdir(parents=True, exist_ok=True)
-    except Exception as e:
-        print(f"Aviso: Não foi possível criar o diretório static ({e})")
-
-app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # ─── Supabase Config ──────────────────────────────────────────────────────────
