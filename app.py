@@ -20,7 +20,11 @@ app = FastAPI(title="Psico Pro", version="3.2.0")
 
 BASE_DIR = Path(__file__).parent
 STATIC_DIR = BASE_DIR / "static"
-STATIC_DIR.mkdir(exist_ok=True)
+if not STATIC_DIR.exists():
+    try:
+        STATIC_DIR.mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        print(f"Aviso: Não foi possível criar o diretório static ({e})")
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -545,4 +549,5 @@ if __name__ == "__main__":
     print("  🗄️  Banco: Supabase (PostgreSQL em nuvem)")
     print("  🌐 Acesse: http://localhost:8000")
     print("=" * 55 + "\n")
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    # uvicorn.run call removed for Vercel compatibility
+
