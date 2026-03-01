@@ -1,4 +1,4 @@
-# 🦺 SESMT PRO v3.0 — Supabase Edition
+# 🦺 PRO v3.0 — Supabase Edition
 
 Plataforma de Segurança do Trabalho com IA e banco de dados em nuvem.
 
